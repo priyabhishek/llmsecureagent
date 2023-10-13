@@ -1,0 +1,68 @@
+{
+	"info": {
+		"_postman_id": "b50d023d-084a-4e0d-b523-3a7c562f3428",
+		"name": "Presidio",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6539212",
+		"_collection_link": "https://lunar-eclipse-737038.postman.co/workspace/AI-LLM-Experiment~c0814c54-1f40-4c1e-bc1e-122175514b9a/collection/6539212-b50d023d-084a-4e0d-b523-3a7c562f3428?action=share&creator=6539212&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Analyze",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"text\" : \"My name is Abhishek Priya. My phone number is +919822121219\",\n    \"language\" : \"en\"\n}"
+				},
+				"url": {
+					"raw": "localhost:31001/analyze",
+					"host": [
+						"localhost"
+					],
+					"port": "31001",
+					"path": [
+						"analyze"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:5002/anonymize",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"text\": \"My name is Abhishek Priya. My phone number is +919822121219\",\n    \"analyzer_results\": [\n        {\n            \"analysis_explanation\": null,\n            \"end\": 25,\n            \"entity_type\": \"PERSON\",\n            \"recognition_metadata\": {\n                \"recognizer_identifier\": \"SpacyRecognizer_276557828352\",\n                \"recognizer_name\": \"SpacyRecognizer\"\n            },\n            \"score\": 0.85,\n            \"start\": 11\n        },\n        {\n            \"analysis_explanation\": null,\n            \"end\": 59,\n            \"entity_type\": \"PHONE_NUMBER\",\n            \"recognition_metadata\": {\n                \"recognizer_identifier\": \"PhoneRecognizer_276557828400\",\n                \"recognizer_name\": \"PhoneRecognizer\"\n            },\n            \"score\": 0.75,\n            \"start\": 46\n        },\n        {\n            \"analysis_explanation\": null,\n            \"end\": 59,\n            \"entity_type\": \"US_BANK_NUMBER\",\n            \"recognition_metadata\": {\n                \"recognizer_identifier\": \"UsBankRecognizer_276550568736\",\n                \"recognizer_name\": \"UsBankRecognizer\"\n            },\n            \"score\": 0.05,\n            \"start\": 47\n        },\n        {\n            \"analysis_explanation\": null,\n            \"end\": 59,\n            \"entity_type\": \"US_DRIVER_LICENSE\",\n            \"recognition_metadata\": {\n                \"recognizer_identifier\": \"UsLicenseRecognizer_276550568832\",\n                \"recognizer_name\": \"UsLicenseRecognizer\"\n            },\n            \"score\": 0.01,\n            \"start\": 47\n        }\n    ],\n    \"anonymizers\": {\n        \"DEFAULT\": {\n            \"type\": \"redact\",\n            \"key\": \"FAFABBCCFAFABBCC0101010101010101\",\n            \"new_value\": \"sha256\"\n        },\n        \"PHONE_NUMBER\": {\n            \"type\": \"mask\",\n            \"masking_char\": \"*\",\n            \"chars_to_mask\": 4,\n            \"from_end\": true\n        }\n    }\n}"
+				},
+				"url": {
+					"raw": "localhost:31002/anonymize",
+					"host": [
+						"localhost"
+					],
+					"port": "31002",
+					"path": [
+						"anonymize"
+					]
+				},
+				"description": "Anonymizer test"
+			},
+			"response": []
+		}
+	]
+}
