@@ -1,3 +1,9 @@
+* Setup Python virtual env
+   python -m venv venv-dev
+
+* Install depedencies:
+   pip install -r /path/to/requirements.txt
+   
 * Downlaod docker images:
    python download_model_images.py
 
