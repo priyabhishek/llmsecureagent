@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: presidio-anonymizer-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: presidio-anonymizer
+  template:
+    metadata:
+      labels:
+        app: presidio-anonymizer
+    spec:
+      containers:
+      - name: presidio-anonymizer
+        image: mcr.microsoft.com/presidio-anonymizer:latest
+        ports:
+        - containerPort: 3000
