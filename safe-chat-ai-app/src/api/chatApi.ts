@@ -1,8 +1,20 @@
 
+import { GenerateHRMessage } from "./GetAnswersFromChatGPT";
 import { fetchAnalysisResponse } from "./TextAnalysisApi";
 import { fetchAnonymizerResponse } from "./TextAnnonymizer";
 
 export const fetchAiReply = async (message: string) => {
+  try {
+    const cleanedInput = await cleanupInput(message);
+    const response = await GenerateHRMessage(cleanedInput);
+    return response;
+
+  } catch (error) {
+    console.error("Error fetching AI reply:", error);
+    throw error;
+  }
+};
+export const cleanupInput = async (message: string) => {
   try {
     const response = await fetchAnalysisResponse(message);
     if (response.status !== "true" || response.analysisData.length === 0) {
@@ -21,4 +33,3 @@ export const fetchAiReply = async (message: string) => {
     throw error;
   }
 };
-
